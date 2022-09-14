@@ -1,4 +1,5 @@
 import os
+from secrets import choice
 import discord
 import random
 from dotenv import load_dotenv
@@ -23,6 +24,12 @@ async def on_ready():
 async def on_message(message):
     if message.author == bot.user:
         return
+
+    if bot.user.mentioned_in(message) and message.content.lower().split()[1] == "choose:":
+        choice_list = message.content.split()
+        choice_list = choice_list[2:]
+        await message.channel.send(f"My choice is {random.choice(choice_list)}")
+
 
     if "dark" in message.content.lower():
         await message.channel.send('The dark is my home.')
