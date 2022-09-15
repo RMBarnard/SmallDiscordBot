@@ -83,7 +83,13 @@ def get_action(p1, p2, damage, amount):
         f"{p1} ate a golden apple to increase their health by {amount} points.\n"
     ]
 
-    if damage == "high":
+    death_options = [
+        f"{p1} dunks {p2} in a bucket of horse piss and {p2} fucking dies\n"
+    ]
+
+    if damage != "heal" and p2.health < 1:
+        return random.choice(death_options) + f"**{p2} died in horse piss.**\n\n"
+    elif damage == "high":
         return random.choice(damage_high) + f"**{p2} has {0 if p2.health < 0 else p2.health} health remaining.**\n\n"
     elif damage == "low":
         return random.choice(damage_low) + f"**{p2} has {0 if p2.health < 0 else p2.health} health remaining.**\n\n"

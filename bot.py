@@ -28,7 +28,11 @@ async def on_message(message):
     if bot.user.mentioned_in(message) and message.content.lower().split()[1] == "choose:":
         choice_list = message.content.split()
         choice_list = choice_list[2:]
-        await message.channel.send(f"My choice is {random.choice(choice_list)}")
+        if "Ryan" in choice_list or "ryan" in choice_list:
+            out = "Ryan"
+        else:
+            out = random.choice(choice_list)
+        await message.channel.send(f"My choice is {out}")
 
 
     if "dark" in message.content.lower():
